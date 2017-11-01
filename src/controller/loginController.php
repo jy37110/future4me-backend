@@ -9,7 +9,7 @@ $password = $_GET['psd'];
 $userModule = new UserModule();
 $result = $userModule->loginCheck($userEmail, $password);
 
-$returnData = (object)[];
+$returnData = new stdClass();
 if($result == true){
     $returnData->success = true;
     $returnData->msg = "Your login is successful";

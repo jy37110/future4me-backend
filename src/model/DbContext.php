@@ -4,7 +4,10 @@ class DbContext {
     private $_db;
     public function __construct()
     {
-        $this->_db = new mysqli('103.226.222.179:3306', 'strate15_jesse', 'future4me','strate15_future4me');
+        //$this->_db = new mysqli('103.226.222.179', 'strate15_jesse', 'future4me','strate15_future4me');
+        $this->_db = new mysqli('localhost', 'strate15_jesse', 'future4me','strate15_future4me');
+        //$this->_db = new mysqli('www.future4me.net', 'strate15_jesse', 'future4me','strate15_future4me');
+
         if ($this->_db->connect_errno) {
             //throw exception
             die("Failed to connect to MySQL: (" . $this->_db->connect_errno . ") " . $this->_db->connect_error);

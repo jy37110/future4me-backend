@@ -9,8 +9,8 @@ $lastName = $_GET['lastName'];
 
 $userModule = new UserModule();
 $result = $userModule->registerUser($userEmail, $firstName, $lastName, $password);
-
-$returnData = (object)[];
+echo('1');
+$returnData = new stdClass();
 if($result == 1){
     $returnData->success = true;
     $returnData->msg = "Your registration is successful";
@@ -19,7 +19,7 @@ if($result == 1){
     $returnData->msg = "Your registration is failed. The information for this registration is invalid";
 }
 echo json_encode($returnData);
-
+echo('2');
 
 
 //$db = new DbContext();
