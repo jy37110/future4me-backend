@@ -9,17 +9,25 @@ $lastName = $_GET['lastName'];
 
 $userModule = new UserModule();
 $result = $userModule->registerUser($userEmail, $firstName, $lastName, $password);
-echo('1');
-$returnData = new stdClass();
+$returnData = array();
+
+
 if($result == 1){
-    $returnData->success = true;
-    $returnData->msg = "Your registration is successful";
+    $returnData['success'] = true;
+    $returnData['msg'] = "Your registration is successful";
 } else {
-    $returnData->success = false;
-    $returnData->msg = "Your registration is failed. The information for this registration is invalid";
+    $returnData['success'] = false;
+    $returnData['msg'] = "Your registration is failed. The email address you provided is already exist";
 }
-echo json_encode($returnData);
-echo('2');
+
+http_response_code(200);
+header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Max-Age: 86400');
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
+
+exit(json_encode($returnData));
 
 
 //$db = new DbContext();

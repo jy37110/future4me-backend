@@ -14,7 +14,7 @@ if($result == true){
     $returnData->success = true;
     $returnData->msg = "Your login is successful";
 } else {
-    $returnData->success = false;
+    $returnData->errors = true;
     $returnData->msg = "Your login is failed. The combination of the id and password is invalid";
 }
 echo json_encode($returnData);
