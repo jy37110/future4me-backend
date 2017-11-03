@@ -6,7 +6,7 @@ class UserModule {
 
     public function __construct() {
         $dbInstance = new DbContext();
-        $this->_db =  $dbInstance->getDBContext();
+        $this->_db = $dbInstance->getDBContext();
     }
 
     public function registerUser($userEmail, $firstName, $lastName, $psd)
