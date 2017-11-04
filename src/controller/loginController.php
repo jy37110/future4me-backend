@@ -4,18 +4,15 @@ include_once '../model/UserModule.php';
 
 $userEmail = $_GET['email'];
 $password = $_GET['psd'];
-$hashedEmail = password_hash($userEmail, PASSWORD_DEFAULT);
-
-
-$userModule = new UserModule();
-$result = $userModule->loginCheck($userEmail, $password);
-
 $returnData = array();
+$userModule = new UserModule();
+$user = $userModule->getUSer($userEmail);
+$loginResult = $userModule->loginCheck($password,$user);
 
-if($result == true){
+if($loginResult == true){
     $returnData['success'] = true;
     $returnData['msg'] = "Your login is successful";
-    $returnData['hashedEmail'] = $hashedEmail;
+    $returnData['user'] = $user;
 } else {
     $returnData['success'] = false;
     $returnData['msg'] = "Your login is failed. The combination of the id and password is invalid";
