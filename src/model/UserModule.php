@@ -9,6 +9,11 @@ class UserModule {
         $this->_db = $dbInstance->getDBContext();
     }
 
+    public function reconnectDB() {
+        $dbInstance = new DbContext();
+        $this->_db = $dbInstance->getDBContext();
+    }
+
     public function registerUser($userEmail, $firstName, $lastName, $psd)
     {
         $query = "INSERT INTO `User` VALUES('','$userEmail', '$firstName', '$lastName', '$psd');";
@@ -21,6 +26,12 @@ class UserModule {
     {
         if ($userModule == false || $userModule == []) return false;
         else return password_verify($psd, $userModule[0]['password']);
+    }
+
+    public function verifyResetPassword($psd, $userModule)
+    {
+        if ($userModule == false || $userModule == []) return false;
+        else return password_verify($userModule[0]['password'], $psd);
     }
 
     public function getUSer($userEmail)
@@ -40,5 +51,13 @@ class UserModule {
             ++$n;
         }
         return $resultArray;
+    }
+
+    public function resetPassword($id,$newPassword)
+    {
+        $query = "UPDATE User SET password='$newPassword' WHERE id=$id";
+        $res = $this->_db->query($query);
+        $this->_db->close();
+        return $res;
     }
 }

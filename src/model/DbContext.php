@@ -17,17 +17,4 @@ class DbContext {
     public function getDBContext(){
         return $this->_db;
     }
-
-    public function getUser(){
-        $query = "SELECT * FROM User";
-        $resObj = $this->_db->query($query);
-        $resultArray = Array();
-        $n = 0;
-        while ($row = $resObj->fetch_assoc()) {
-            $resultArray[$n] = $row;
-            ++$n;
-        }
-        $this->_db->close();
-        return $resultArray;
-    }
 }

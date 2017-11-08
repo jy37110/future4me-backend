@@ -12,7 +12,7 @@ $loginResult = $userModule->loginCheck($password,$user);
 if($loginResult == true){
     $returnData['success'] = true;
     $returnData['msg'] = "Your login is successful";
-    $returnData['user'] = $user;
+    $returnData['user'] = $user[0];
 } else {
     $returnData['success'] = false;
     $returnData['msg'] = "Your login is failed. The combination of the id and password is invalid";
